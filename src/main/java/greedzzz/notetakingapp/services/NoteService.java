@@ -6,21 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
     private final NoteRepository noteRepository;
+    private final NoteEditor noteEditor;
 
     @Autowired
-    public NoteService(NoteRepository noteRepository) {
+    public NoteService(NoteRepository noteRepository, NoteEditor noteEditor) {
         this.noteRepository = noteRepository;
+        this.noteEditor = noteEditor;
     }
 
     public boolean create(String name) {
-        Note note = new Note();
-        note.setName(name);
-        note.setText("");
-        return save(note);
+        if (checkIfExists(name)) {
+            Note note = new Note();
+            note.setName(name);
+            note.setText("");
+            save(note);
+            return true;
+        } else return false;
     }
 
     public boolean delete(String name) {
@@ -30,26 +36,29 @@ public class NoteService {
         } else return false;
     }
 
-    public String show(String name) {
-        Note note = find(name);
-        if (null != note) return note.getText();
-        else return null;
+    public boolean edit(String name) {
+        Optional<Note> possibleNote = find(name);
+        if (possibleNote.isPresent()) {
+            noteEditor.edit(possibleNote.get().getText());
+            return true;
+        } else return false;
     }
 
     public List<Note> list() {
         return noteRepository.findAll();
     }
 
-    public boolean save(Note note) {
-        if (checkIfExists(note.getName())) {
-            noteRepository.save(note);
-            return true;
-        } else return false;
+    public String show(String name) {
+        Optional<Note> possibleNote = find(name);
+        return possibleNote.map(Note::getText).orElse(null);
     }
 
-    public Note find(String name) {
-        if (checkIfExists(name)) return noteRepository.findByName(name);
-        else return null;
+    private void save(Note note) {
+        noteRepository.save(note);
+    }
+
+    private Optional<Note> find(String name) {
+        return noteRepository.findByName(name);
     }
 
     private boolean checkIfExists(String name) {
