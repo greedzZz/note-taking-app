@@ -28,7 +28,7 @@ public class NoteCommands {
 
     @ShellMethod("Starts editing the specified note.")
     public void edit(@ShellOption String noteName) {
-
+        userOutput.printEditResult(noteService.edit(noteName));
     }
 
     @ShellMethod("Displays a list of all notes.")
