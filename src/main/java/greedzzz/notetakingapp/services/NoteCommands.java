@@ -17,27 +17,27 @@ public class NoteCommands {
     }
 
     @ShellMethod("Creates a new note with the specified name.")
-    public void create(@ShellOption String noteName) {
-        userOutput.printCreateResult(noteService.create(noteName));
+    public String create(@ShellOption String noteName) {
+        return userOutput.getCreateResult(noteService.create(noteName));
     }
 
     @ShellMethod("Deletes the specified note.")
-    public void delete(@ShellOption String noteName) {
-        userOutput.printDeleteResult(noteService.delete(noteName));
+    public String delete(@ShellOption String noteName) {
+        return userOutput.getDeleteResult(noteService.delete(noteName));
     }
 
     @ShellMethod("Starts editing the specified note.")
-    public void edit(@ShellOption String noteName) {
-        userOutput.printEditResult(noteService.edit(noteName));
+    public String edit(@ShellOption String noteName) {
+        return userOutput.getEditResult(noteService.edit(noteName));
     }
 
     @ShellMethod("Displays a list of all notes.")
-    public void list() {
-        userOutput.printListResult(noteService.list());
+    public String list() {
+        return userOutput.getListResult(noteService.list());
     }
 
     @ShellMethod("Displays the text of the specified note.")
-    public void show(@ShellOption String noteName) {
-        userOutput.printShowResult(noteService.show(noteName));
+    public String show(@ShellOption String noteName) {
+        return userOutput.getShowResult(noteService.show(noteName));
     }
 }

@@ -7,35 +7,35 @@ import java.util.List;
 
 @Service
 public class UserOutput {
-    public void printCreateResult(boolean created) {
-        if (created) System.out.println("The new note has been successfully created.");
-        else System.out.println("A note with the same name already exists.");
+    public String getCreateResult(boolean created) {
+        if (created) return "The new note has been successfully created.";
+        else return "A note with the same name already exists.";
     }
 
-    public void printDeleteResult(boolean deleted) {
-        if (deleted) System.out.println("The note has been successfully deleted.");
-        else System.out.println("There was no note with that name.");
+    public String getDeleteResult(boolean deleted) {
+        if (deleted) return "The note has been successfully deleted.";
+        else return "There was no note with that name.";
     }
 
-    public void printEditResult(boolean edited) {
-        if (edited) System.out.println("The note has been successfully edited.");
-        else System.out.println("Unable to edit note with that name.");
+    public String getEditResult(boolean edited) {
+        if (edited) return "The note has been successfully edited.";
+        else return "Unable to edit note with that name.";
     }
 
-    public void printListResult(List<Note> notes) {
+    public String getListResult(List<Note> notes) {
         if (!notes.isEmpty()) {
-            System.out.println("The list of notes:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("The list of notes:\n");
             for (Note note : notes) {
-                System.out.println(note.getName());
+                sb.append(note.getName());
+                sb.append("\n");
             }
-        } else System.out.println("There are currently no notes.");
+            return sb.toString();
+        } else return "There are currently no notes.";
     }
 
-    public void printShowResult(String text) {
-        if (null == text) System.out.println("There was no note with that name.");
-        else {
-            System.out.println("The text of this note:");
-            System.out.println(text);
-        }
+    public String getShowResult(String text) {
+        if (null == text) return "There was no note with that name.";
+        else return "The text of this note:\n" + text;
     }
 }
