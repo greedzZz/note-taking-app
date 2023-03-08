@@ -1,11 +1,11 @@
-package greedzzz.notetakingapp.ui;
+package greedzzz.notetakingapp.services;
 
 import greedzzz.notetakingapp.model.Note;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserOutput {
     public void printCreateResult(boolean created) {
         if (created) System.out.println("The new note has been successfully created.");

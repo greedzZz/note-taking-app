@@ -1,4 +1,4 @@
-package greedzzz.notetakingapp.ui;
+package greedzzz.notetakingapp.shellconfig;
 
 import org.jline.utils.AttributedString;
 import org.springframework.shell.jline.PromptProvider;

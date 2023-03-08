@@ -1,18 +1,17 @@
-package greedzzz.notetakingapp.ui;
+package greedzzz.notetakingapp.services;
 
-import greedzzz.notetakingapp.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 @ShellComponent
-public class UserCommands {
+public class NoteCommands {
     private final NoteService noteService;
     private final UserOutput userOutput;
 
     @Autowired
-    public UserCommands(NoteService noteService, UserOutput userOutput) {
+    public NoteCommands(NoteService noteService, UserOutput userOutput) {
         this.noteService = noteService;
         this.userOutput = userOutput;
     }
