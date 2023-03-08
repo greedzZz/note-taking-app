@@ -16,6 +16,6 @@ public class Note {
     private int id;
     @Column(unique = true)
     private String name;
-    @Lob
+    @Column(columnDefinition = "text")
     private String text;
 }
