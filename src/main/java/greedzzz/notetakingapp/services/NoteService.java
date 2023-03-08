@@ -2,6 +2,7 @@ package greedzzz.notetakingapp.services;
 
 import greedzzz.notetakingapp.model.Note;
 import greedzzz.notetakingapp.repositories.NoteRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,12 @@ public class NoteService {
     public NoteService(NoteRepository noteRepository, NoteEditor noteEditor) {
         this.noteRepository = noteRepository;
         this.noteEditor = noteEditor;
+    }
+
+    @PostConstruct
+    private void init() {
+        List<Note> notes = list();
+        if (notes.isEmpty()) create("default");
     }
 
     public boolean create(String name) {
