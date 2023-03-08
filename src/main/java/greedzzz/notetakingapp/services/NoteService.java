@@ -5,6 +5,7 @@ import greedzzz.notetakingapp.repositories.NoteRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class NoteService {
     }
 
     public boolean create(String name) {
-        if (checkIfExists(name)) {
+        if (!checkIfExists(name)) {
             Note note = new Note();
             note.setName(name);
             note.setText("");
@@ -35,7 +36,7 @@ public class NoteService {
             return true;
         } else return false;
     }
-
+    @Transactional
     public boolean delete(String name) {
         if (checkIfExists(name)) {
             noteRepository.deleteByName(name);
