@@ -17,6 +17,11 @@ public class UserOutput {
         else System.out.println("There was no note with that name.");
     }
 
+    public void printEditResult(boolean edited) {
+        if (edited) System.out.println("The note has been successfully edited.");
+        else System.out.println("Unable to edit note with that name.");
+    }
+
     public void printListResult(List<Note> notes) {
         if (!notes.isEmpty()) {
             System.out.println("The list of notes:");

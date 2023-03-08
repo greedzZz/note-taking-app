@@ -39,8 +39,11 @@ public class NoteService {
     public boolean edit(String name) {
         Optional<Note> possibleNote = find(name);
         if (possibleNote.isPresent()) {
-            noteEditor.edit(possibleNote.get().getText());
-            return true;
+            Note note = noteEditor.edit(possibleNote.get());
+            if (null != note) {
+                save(note);
+                return true;
+            } else return false;
         } else return false;
     }
 
